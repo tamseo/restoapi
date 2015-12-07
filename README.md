@@ -18,4 +18,4 @@ rx007, tamseo
 
 ## License
 
-This is licensed under Apache 2.0
+This is licensed under WTFPL
