@@ -34,5 +34,4 @@ public class Application {
         GuavaCacheManager cacheManager = new GuavaCacheManager("greetings");
         return cacheManager;
     }
-
 }

@@ -1,0 +1,16 @@
+[
+	{
+		"id" : "55190755b361086d15f04ff8",
+		"tableId" : "TB0001",
+		"name" : "Table 1",
+		"description" : "This is table 1",
+		"siteId" : "S001"
+	},
+	{
+		"id" : "55190762b361086d15f04ff9",
+		"tableId" : "TB0002",
+		"name" : "Table 2",
+		"description" : "This is table 1",
+		"siteId" : "S002"
+	}
+]

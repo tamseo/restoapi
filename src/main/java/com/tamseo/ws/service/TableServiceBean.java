@@ -23,5 +23,10 @@ public class TableServiceBean implements TableService {
   public List<Table> findAll() {
     return tableRepository.findAll();
   }
+  
+  @Override
+  public List<Table> findTablesBySiteId(String siteId) {
+    return tableRepository.findBySiteId(siteId);
+  }
 
 }
