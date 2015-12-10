@@ -19,44 +19,43 @@ import com.tamseo.ws.model.Role;
 import com.tamseo.ws.service.AccountService;
 
 /**
- * A Spring Security UserDetailsService implementation which creates UserDetails
- * objects from the Account and Role entities.
+ * A Spring Security UserDetailsService implementation which creates UserDetails objects from the
+ * Account and Role entities.
  * 
  */
 @Service
 public class AccountUserDetailsService implements UserDetailsService {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+  private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    /**
-     * The AccountService business service.
-     */
-    @Autowired
-    private AccountService accountService;
+  /**
+   * The AccountService business service.
+   */
+  @Autowired
+  private AccountService accountService;
 
-    @Override
-    public UserDetails loadUserByUsername(String username)
-            throws UsernameNotFoundException {
-        logger.info("> loadUserByUsername {}", username);
+  @Override
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    logger.info("> loadUserByUsername {}", username);
 
-        Account account = accountService.findByUsername(username);
-        if (account == null) {
-            logger.info("< loadUserByUsername {}", username);
-            return null;
-        }
-
-        Collection<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
-        for (Role role : account.getRoles()) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.getCode()));
-        }
-
-        User userDetails = new User(account.getUsername(),
-                account.getPassword(), account.isEnabled(),
-                !account.isExpired(), !account.isCredentialsexpired(),
-                !account.isLocked(), grantedAuthorities);
-
-        logger.info("< loadUserByUsername {}", username);
-        return userDetails;
+    Account account = accountService.findByUsername(username);
+    if (account == null) {
+      logger.info("< loadUserByUsername {}", username);
+      return null;
     }
+
+    Collection<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
+    for (Role role : account.getRoles()) {
+      grantedAuthorities.add(new SimpleGrantedAuthority(role.getCode()));
+    }
+
+    User userDetails =
+        new User(account.getUsername(), account.getPassword(), account.isEnabled(),
+            !account.isExpired(), !account.isCredentialsexpired(), !account.isLocked(),
+            grantedAuthorities);
+
+    logger.info("< loadUserByUsername {}", username);
+    return userDetails;
+  }
 
 }

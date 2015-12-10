@@ -18,26 +18,24 @@ import com.google.common.base.Predicate;
 @EnableSwagger2
 public class ApiDocsConfiguration {
 
-    /**
-     * Create a Docket class to be used by Springfox's Swagger API Documentation
-     * framework. See http://springfox.github.io/springfox/ for more
-     * information.
-     * @return A Docket instance.
-     */
-    @Bean
-    public Docket docket() {
-        Predicate<String> paths = PathSelectors.ant("/api/**");
+  /**
+   * Create a Docket class to be used by Springfox's Swagger API Documentation framework. See
+   * http://springfox.github.io/springfox/ for more information.
+   * 
+   * @return A Docket instance.
+   */
+  @Bean
+  public Docket docket() {
+    Predicate<String> paths = PathSelectors.ant("/api/**");
 
-        ApiInfo apiInfo = new ApiInfoBuilder()
-                .title("Restonet API")
-                .description(
-                        "API for Restonetsystem")
-                .contact("tamseo@gmail.com").version("1.0").build();
+    ApiInfo apiInfo =
+        new ApiInfoBuilder().title("Restonet API").description("API for Restonetsystem")
+            .contact("tamseo@gmail.com").version("1.0").build();
 
-        Docket docket = new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo).select().paths(paths).build();
+    Docket docket =
+        new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo).select().paths(paths).build();
 
-        return docket;
-    }
+    return docket;
+  }
 
 }

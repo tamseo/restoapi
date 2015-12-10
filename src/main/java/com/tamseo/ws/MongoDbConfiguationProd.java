@@ -17,16 +17,16 @@ public class MongoDbConfiguationProd {
 
   @Value("${mongo.host}")
   private String host;
-  
+
   @Value("${mongo.database}")
   private String database;
-  
+
   @Value("${mongo.username}")
   private String username;
-  
+
   @Value("${mongo.passwd}")
   private String passwd;
-  
+
   @SuppressWarnings("deprecation")
   public @Bean MongoDbFactory mongoDbFactory() throws Exception {
     UserCredentials userCredentials = new UserCredentials(username, passwd);

@@ -11,108 +11,107 @@ import org.joda.time.DateTime;
 @MappedSuperclass
 public class ReferenceEntity implements Serializable {
 
-    /**
-     * The default serial version UID.
-     */
-    private static final long serialVersionUID = 1L;
+  /**
+   * The default serial version UID.
+   */
+  private static final long serialVersionUID = 1L;
 
-    /**
-     * The primary key identifier.
-     */
-    @Id
-    private Long id;
+  /**
+   * The primary key identifier.
+   */
+  @Id
+  private Long id;
 
-    /**
-     * The unique code value, sometimes used for external reference.
-     */
-    @NotNull
-    private String code;
+  /**
+   * The unique code value, sometimes used for external reference.
+   */
+  @NotNull
+  private String code;
 
-    /**
-     * A brief description of the entity.
-     */
-    @NotNull
-    private String label;
+  /**
+   * A brief description of the entity.
+   */
+  @NotNull
+  private String label;
 
-    /**
-     * The ordinal value facilitates sorting the entities.
-     */
-    @NotNull
-    private Integer ordinal;
+  /**
+   * The ordinal value facilitates sorting the entities.
+   */
+  @NotNull
+  private Integer ordinal;
 
-    /**
-     * The timestamp at which the entity's values may be applied or used by the
-     * system.
-     */
-    @NotNull
-    private DateTime effectiveAt;
+  /**
+   * The timestamp at which the entity's values may be applied or used by the system.
+   */
+  @NotNull
+  private DateTime effectiveAt;
 
-    /**
-     * The timestamp at which the entity's values cease to be used by the
-     * system. If <code>null</code> the entity is not expired.
-     */
-    private DateTime expiresAt;
+  /**
+   * The timestamp at which the entity's values cease to be used by the system. If <code>null</code>
+   * the entity is not expired.
+   */
+  private DateTime expiresAt;
 
-    /**
-     * The timestamp when this entity instance was created.
-     */
-    @NotNull
-    private DateTime createdAt;
+  /**
+   * The timestamp when this entity instance was created.
+   */
+  @NotNull
+  private DateTime createdAt;
 
-    public Long getId() {
-        return id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public String getCode() {
-        return code;
-    }
+  public String getCode() {
+    return code;
+  }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
+  public void setCode(String code) {
+    this.code = code;
+  }
 
-    public String getLabel() {
-        return label;
-    }
+  public String getLabel() {
+    return label;
+  }
 
-    public void setLabel(String label) {
-        this.label = label;
-    }
+  public void setLabel(String label) {
+    this.label = label;
+  }
 
-    public Integer getOrdinal() {
-        return ordinal;
-    }
+  public Integer getOrdinal() {
+    return ordinal;
+  }
 
-    public void setOrdinal(Integer ordinal) {
-        this.ordinal = ordinal;
-    }
+  public void setOrdinal(Integer ordinal) {
+    this.ordinal = ordinal;
+  }
 
-    public DateTime getEffectiveAt() {
-        return effectiveAt;
-    }
+  public DateTime getEffectiveAt() {
+    return effectiveAt;
+  }
 
-    public void setEffectiveAt(DateTime effectiveAt) {
-        this.effectiveAt = effectiveAt;
-    }
+  public void setEffectiveAt(DateTime effectiveAt) {
+    this.effectiveAt = effectiveAt;
+  }
 
-    public DateTime getExpiresAt() {
-        return expiresAt;
-    }
+  public DateTime getExpiresAt() {
+    return expiresAt;
+  }
 
-    public void setExpiresAt(DateTime expiresAt) {
-        this.expiresAt = expiresAt;
-    }
+  public void setExpiresAt(DateTime expiresAt) {
+    this.expiresAt = expiresAt;
+  }
 
-    public DateTime getCreatedAt() {
-        return createdAt;
-    }
+  public DateTime getCreatedAt() {
+    return createdAt;
+  }
 
-    public void setCreatedAt(DateTime createdAt) {
-        this.createdAt = createdAt;
-    }
+  public void setCreatedAt(DateTime createdAt) {
+    this.createdAt = createdAt;
+  }
 
 }

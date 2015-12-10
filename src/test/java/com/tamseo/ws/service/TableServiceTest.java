@@ -20,7 +20,7 @@ public class TableServiceTest extends AbstractTest {
     Collection<Table> tables = tableService.findAll();
     Assert.assertEquals(2, tables.size());
   }
-  
+
   @Test
   public void testGetTableBySiteId() {
     List<Table> tables = tableService.findTablesBySiteId("S001");

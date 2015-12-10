@@ -15,28 +15,28 @@ import org.springframework.web.filter.GenericFilterBean;
 import com.tamseo.ws.util.RequestContext;
 
 /**
- * The RequestContextInitializationFilter is executed for every web request. The
- * filter initializes the RequestContext for the current thread, preventing
- * leaking of RequestContext attributes from the previous thread's execution.
+ * The RequestContextInitializationFilter is executed for every web request. The filter initializes
+ * the RequestContext for the current thread, preventing leaking of RequestContext attributes from
+ * the previous thread's execution.
  * 
  */
 @Component
 public class RequestContextInitializationFilter extends GenericFilterBean {
 
-    /**
-     * The Logger for this class.
-     */
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+  /**
+   * The Logger for this class.
+   */
+  private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Override
-    public void doFilter(ServletRequest req, ServletResponse resp,
-            FilterChain chain) throws IOException, ServletException {
-        logger.debug("> doFilter");
+  @Override
+  public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
+      throws IOException, ServletException {
+    logger.debug("> doFilter");
 
-        RequestContext.init();
+    RequestContext.init();
 
-        chain.doFilter(req, resp);
-        logger.debug("< doFilter");
-    }
+    chain.doFilter(req, resp);
+    logger.debug("< doFilter");
+  }
 
 }

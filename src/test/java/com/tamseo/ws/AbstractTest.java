@@ -9,24 +9,23 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.tamseo.ws.util.RequestContext;
 
 /**
- * The AbstractTest class is the parent of all JUnit test classes. This class
- * configures the test ApplicationContext and test runner environment.
+ * The AbstractTest class is the parent of all JUnit test classes. This class configures the test
+ * ApplicationContext and test runner environment.
  * 
  * @author Matt Warman
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(
-        classes = Application.class)
+@SpringApplicationConfiguration(classes = Application.class)
 public abstract class AbstractTest {
 
-    public static final String USERNAME = "unittest";
+  public static final String USERNAME = "unittest";
 
-    protected Logger logger = LoggerFactory.getLogger(this.getClass());
+  protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    protected void setUp() {
+  protected void setUp() {
 
-        RequestContext.setUsername(AbstractTest.USERNAME);
+    RequestContext.setUsername(AbstractTest.USERNAME);
 
-    }
+  }
 
 }

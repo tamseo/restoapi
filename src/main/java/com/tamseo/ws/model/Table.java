@@ -3,7 +3,7 @@ package com.tamseo.ws.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection="tables")
+@Document(collection = "tables")
 public class Table {
 
   @Id
@@ -12,11 +12,11 @@ public class Table {
   private String name;
   private String description;
   private String siteId;
-  
+
   public Table() {
-    
+
   }
-  
+
   public Table(String name, String description, String site_id) {
     this.name = name;
     this.description = description;

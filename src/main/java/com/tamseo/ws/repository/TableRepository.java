@@ -9,7 +9,7 @@ import com.tamseo.ws.model.Table;
 public interface TableRepository extends MongoRepository<Table, String> {
 
   public Table findByTableId(String id);
-  
+
   public List<Table> findBySiteId(String siteId);
-  
+
 }

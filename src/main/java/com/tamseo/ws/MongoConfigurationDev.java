@@ -36,7 +36,7 @@ public class MongoConfigurationDev {
   public @Bean MongoDbFactory mongoDbFactory() throws Exception {
 
     Fongo fongo = new Fongo("mongo server 1");
-    insertFakeDataIntoFakeMongoDb(fongo,"tables", Table.class);
+    insertFakeDataIntoFakeMongoDb(fongo, "tables", Table.class);
 
     return new SimpleMongoDbFactory(fongo.getMongo(), "restonet");
 
@@ -46,20 +46,19 @@ public class MongoConfigurationDev {
     return new MongoTemplate(mongoDbFactory());
   }
 
-  private <T> void insertFakeDataIntoFakeMongoDb(Fongo fongo, String collectionName, Class<T> model) throws IOException, JsonParseException,
-      JsonMappingException, JsonProcessingException {
+  private <T> void insertFakeDataIntoFakeMongoDb(Fongo fongo, String collectionName, Class<T> model)
+      throws IOException, JsonParseException, JsonMappingException, JsonProcessingException {
 
     DB db = fongo.getDB("restonet");
     DBCollection collection = db.getCollection(collectionName);
-    Resource resource = context.getResource("classpath:data/mongodb/"+ collectionName +".json");
+    Resource resource = context.getResource("classpath:data/mongodb/" + collectionName + ".json");
 
     InputStream inputStream = resource.getInputStream();
     String json = IOUtils.toString(inputStream);
 
     ObjectMapper mapper = new ObjectMapper();
     List<T> objects =
-        mapper.readValue(json,
-            mapper.getTypeFactory().constructCollectionType(List.class, model));
+        mapper.readValue(json, mapper.getTypeFactory().constructCollectionType(List.class, model));
 
     for (T object : objects) {
       DBObject dbObject = (DBObject) JSON.parse(mapper.writeValueAsString(object));

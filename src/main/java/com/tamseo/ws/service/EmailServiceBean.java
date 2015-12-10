@@ -11,67 +11,66 @@ import com.tamseo.ws.model.Greeting;
 import com.tamseo.ws.util.AsyncResponse;
 
 /**
- * The EmailServiceBean encapsulates all business behaviors defined by the
- * EmailService interface.
+ * The EmailServiceBean encapsulates all business behaviors defined by the EmailService interface.
  * 
  */
 @Service
 public class EmailServiceBean implements EmailService {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+  private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Override
-    public Boolean send(Greeting greeting) {
-        logger.info("> send");
+  @Override
+  public Boolean send(Greeting greeting) {
+    logger.info("> send");
 
-        Boolean success = Boolean.FALSE;
+    Boolean success = Boolean.FALSE;
 
-        // Simulate method execution time
-        long pause = 5000;
-        try {
-            Thread.sleep(pause);
-        } catch (Exception e) {
-            // do nothing
-        }
-        logger.info("Processing time was {} seconds.", pause / 1000);
+    // Simulate method execution time
+    long pause = 5000;
+    try {
+      Thread.sleep(pause);
+    } catch (Exception e) {
+      // do nothing
+    }
+    logger.info("Processing time was {} seconds.", pause / 1000);
 
-        success = Boolean.TRUE;
+    success = Boolean.TRUE;
 
-        logger.info("< send");
-        return success;
+    logger.info("< send");
+    return success;
+  }
+
+  @Async
+  @Override
+  public void sendAsync(Greeting greeting) {
+    logger.info("> sendAsync");
+
+    try {
+      send(greeting);
+    } catch (Exception e) {
+      logger.warn("Exception caught sending asynchronous mail.", e);
     }
 
-    @Async
-    @Override
-    public void sendAsync(Greeting greeting) {
-        logger.info("> sendAsync");
+    logger.info("< sendAsync");
+  }
 
-        try {
-            send(greeting);
-        } catch (Exception e) {
-            logger.warn("Exception caught sending asynchronous mail.", e);
-        }
+  @Async
+  @Override
+  public Future<Boolean> sendAsyncWithResult(Greeting greeting) {
+    logger.info("> sendAsyncWithResult");
 
-        logger.info("< sendAsync");
+    AsyncResponse<Boolean> response = new AsyncResponse<Boolean>();
+
+    try {
+      Boolean success = send(greeting);
+      response.complete(success);
+    } catch (Exception e) {
+      logger.warn("Exception caught sending asynchronous mail.", e);
+      response.completeExceptionally(e);
     }
 
-    @Async
-    @Override
-    public Future<Boolean> sendAsyncWithResult(Greeting greeting) {
-        logger.info("> sendAsyncWithResult");
-
-        AsyncResponse<Boolean> response = new AsyncResponse<Boolean>();
-
-        try {
-            Boolean success = send(greeting);
-            response.complete(success);
-        } catch (Exception e) {
-            logger.warn("Exception caught sending asynchronous mail.", e);
-            response.completeExceptionally(e);
-        }
-
-        logger.info("< sendAsyncWithResult");
-        return response;
-    }
+    logger.info("< sendAsyncWithResult");
+    return response;
+  }
 
 }

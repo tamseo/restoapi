@@ -8,6 +8,6 @@ import com.tamseo.ws.model.Account;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
-    Account findByUsername(String username);
+  Account findByUsername(String username);
 
 }

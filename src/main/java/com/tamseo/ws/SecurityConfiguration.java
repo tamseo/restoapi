@@ -19,126 +19,102 @@ import com.tamseo.ws.security.AccountAuthenticationProvider;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
-    @Autowired
-    private AccountAuthenticationProvider accountAuthenticationProvider;
+  @Autowired
+  private AccountAuthenticationProvider accountAuthenticationProvider;
 
-    /**
-     * Supplies a PasswordEncoder instance to the Spring ApplicationContext. The
-     * PasswordEncoder is used by the AuthenticationProvider to perform one-way
-     * hash operations on passwords for credential comparison.
-     * 
-     * @return A PasswordEncoder.
-     */
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+  /**
+   * Supplies a PasswordEncoder instance to the Spring ApplicationContext. The PasswordEncoder is
+   * used by the AuthenticationProvider to perform one-way hash operations on passwords for
+   * credential comparison.
+   * 
+   * @return A PasswordEncoder.
+   */
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
 
-    /**
-     * This method builds the AuthenticationProvider used by the system to
-     * process authentication requests.
-     * 
-     * @param auth An AuthenticationManagerBuilder instance used to construct
-     *        the AuthenticationProvider.
-     * @throws Exception Thrown if a problem occurs constructing the
-     *         AuthenticationProvider.
-     */
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth)
-            throws Exception {
+  /**
+   * This method builds the AuthenticationProvider used by the system to process authentication
+   * requests.
+   * 
+   * @param auth An AuthenticationManagerBuilder instance used to construct the
+   *        AuthenticationProvider.
+   * @throws Exception Thrown if a problem occurs constructing the AuthenticationProvider.
+   */
+  @Autowired
+  public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
-        auth.authenticationProvider(accountAuthenticationProvider);
+    auth.authenticationProvider(accountAuthenticationProvider);
 
-    }
+  }
 
-    /**
-     * This inner class configures the WebSecurityConfigurerAdapter instance for
-     * the web service API context paths.
-     */
-    @Configuration
-    @Order(1)
-    public static class ApiWebSecurityConfigurerAdapter
-            extends WebSecurityConfigurerAdapter {
+  /**
+   * This inner class configures the WebSecurityConfigurerAdapter instance for the web service API
+   * context paths.
+   */
+  @Configuration
+  @Order(1)
+  public static class ApiWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
 
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
 
-            // @formatter:off
-            
-            http
-            .csrf().disable()
-            .antMatcher("/api/**")
-              .authorizeRequests()
-                .anyRequest().hasRole("USER")
-            .and()
-            .httpBasic()
-            .and()
-            .sessionManagement()
-              .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-            
-            // @formatter:on
+      // @formatter:off
 
-        }
+      http.csrf().disable().antMatcher("/api/**").authorizeRequests().anyRequest().hasRole("USER")
+          .and().httpBasic().and().sessionManagement()
+          .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+      // @formatter:on
 
     }
 
-    /**
-     * This inner class configures the WebSecurityConfigurerAdapter instance for
-     * the Spring Actuator web service context paths.
-     */
-    @Configuration
-    @Order(2)
-    public static class ActuatorWebSecurityConfigurerAdapter
-            extends WebSecurityConfigurerAdapter {
+  }
 
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
+  /**
+   * This inner class configures the WebSecurityConfigurerAdapter instance for the Spring Actuator
+   * web service context paths.
+   */
+  @Configuration
+  @Order(2)
+  public static class ActuatorWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
 
-            // @formatter:off
-            
-            http
-            .csrf().disable()
-            .antMatcher("/actuators/**")
-              .authorizeRequests()
-                .anyRequest().hasRole("SYSADMIN")
-            .and()
-            .httpBasic()
-            .and()
-            .sessionManagement()
-              .sessionCreationPolicy(SessionCreationPolicy.STATELESS); 
-            
-            // @formatter:on
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
 
-        }
+      // @formatter:off
+
+      http.csrf().disable().antMatcher("/actuators/**").authorizeRequests().anyRequest()
+          .hasRole("SYSADMIN").and().httpBasic().and().sessionManagement()
+          .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+      // @formatter:on
 
     }
 
-    /**
-     * This inner class configures the WebSecurityConfigurerAdapter instance for
-     * any remaining context paths not handled by other adapters.
-     * 
-     */
-    @Profile("docs")
-    @Configuration
-    public static class FormLoginWebSecurityConfigurerAdapter
-            extends WebSecurityConfigurerAdapter {
+  }
 
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
+  /**
+   * This inner class configures the WebSecurityConfigurerAdapter instance for any remaining context
+   * paths not handled by other adapters.
+   * 
+   */
+  @Profile("docs")
+  @Configuration
+  public static class FormLoginWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
 
-            // @formatter:off
-            
-            http
-              .csrf().disable()
-              .authorizeRequests()
-                .anyRequest().authenticated()
-              .and()
-              .formLogin();
-            
-            // @formatter:on
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
 
-        }
+      // @formatter:off
+
+      http.csrf().disable().authorizeRequests().anyRequest().authenticated().and().formLogin();
+
+      // @formatter:on
 
     }
+
+  }
 
 }
