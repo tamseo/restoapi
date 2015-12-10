@@ -1,6 +1,7 @@
 package com.tamseo.ws.service;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -18,5 +19,11 @@ public class TableServiceTest extends AbstractTest {
   public void testGetAllTables() {
     Collection<Table> tables = tableService.findAll();
     Assert.assertEquals(2, tables.size());
+  }
+  
+  @Test
+  public void testGetTableBySiteId() {
+    List<Table> tables = tableService.findTablesBySiteId("S001");
+    Assert.assertEquals("Table 1", tables.get(0).getName());
   }
 }
