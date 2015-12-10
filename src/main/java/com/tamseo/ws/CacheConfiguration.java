@@ -20,7 +20,7 @@ public class CacheConfiguration {
    */
   @Bean
   public CacheManager cacheManager() {
-    GuavaCacheManager cacheManager = new GuavaCacheManager("greetings");
+    GuavaCacheManager cacheManager = new GuavaCacheManager("restonet");
     return cacheManager;
   }
 
