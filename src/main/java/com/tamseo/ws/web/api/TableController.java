@@ -29,14 +29,14 @@ public class TableController extends BaseController {
   @Autowired
   private TableService tableService;
 
-  @RequestMapping(value = "/api/tables", method = RequestMethod.GET,
+  @RequestMapping(value = "/resto/tables", method = RequestMethod.GET,
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Collection<Table>> getTables() {
     Collection<Table> tables = tableService.findAll();
     return new ResponseEntity<Collection<Table>>(tables, HttpStatus.OK);
   }
 
-  @RequestMapping(value = "/api/table/{siteId}", method = RequestMethod.GET,
+  @RequestMapping(value = "/resto/table/{siteId}", method = RequestMethod.GET,
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<List<Table>> getTablesBySiteId(@PathVariable String siteId) {
     List<Table> tables = tableService.findTablesBySiteId(siteId);

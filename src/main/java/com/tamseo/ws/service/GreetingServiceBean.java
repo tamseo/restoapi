@@ -26,6 +26,8 @@ import com.tamseo.ws.repository.GreetingRepository;
 @Service
 public class GreetingServiceBean implements GreetingService {
 
+  private static final String CACHE_NAME = "restonet";
+
   private Logger logger = LoggerFactory.getLogger(this.getClass());
 
   /**
@@ -52,7 +54,7 @@ public class GreetingServiceBean implements GreetingService {
     return greetings;
   }
 
-  @Cacheable(value = "greetings", key = "#id")
+  @Cacheable(value = CACHE_NAME, key = "#id")
   @Override
   public Greeting findOne(Long id) {
     logger.info("> findOne {}", id);
@@ -65,7 +67,7 @@ public class GreetingServiceBean implements GreetingService {
     return greeting;
   }
 
-  @CachePut(value = "greetings", key = "#result.id")
+  @CachePut(value = CACHE_NAME, key = "#result.id")
   @Transactional
   @Override
   public Greeting create(Greeting greeting) {
@@ -89,7 +91,7 @@ public class GreetingServiceBean implements GreetingService {
     return savedGreeting;
   }
 
-  @CachePut(value = "greetings", key = "#greeting.id")
+  @CachePut(value = CACHE_NAME, key = "#greeting.id")
   @Transactional
   @Override
   public Greeting update(Greeting greeting) {
@@ -114,7 +116,7 @@ public class GreetingServiceBean implements GreetingService {
     return updatedGreeting;
   }
 
-  @CacheEvict(value = "greetings", key = "#id")
+  @CacheEvict(value = CACHE_NAME, key = "#id")
   @Transactional
   @Override
   public void delete(Long id) {
@@ -127,7 +129,7 @@ public class GreetingServiceBean implements GreetingService {
     logger.info("< delete {}", id);
   }
 
-  @CacheEvict(value = "greetings", allEntries = true)
+  @CacheEvict(value = CACHE_NAME, allEntries = true)
   @Override
   public void evictCache() {
     logger.info("> evictCache");

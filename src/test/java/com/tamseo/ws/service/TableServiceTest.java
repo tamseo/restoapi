@@ -18,7 +18,7 @@ public class TableServiceTest extends AbstractTest {
   @Test
   public void testGetAllTables() {
     Collection<Table> tables = tableService.findAll();
-    Assert.assertEquals(2, tables.size());
+    Assert.assertEquals(5, tables.size());
   }
 
   @Test

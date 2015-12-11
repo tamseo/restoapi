@@ -26,7 +26,7 @@ public class TableRepositoryTest {
   public void testGetAllTables() {
 
     Collection<Table> tables = tableRepository.findAll();
-    Assert.assertEquals(2, tables.size());
+    Assert.assertEquals(5, tables.size());
   }
 
   @Test
